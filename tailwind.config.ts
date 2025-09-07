@@ -57,6 +57,13 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        // Water Health Custom Colors
+        "water-blue": "hsl(var(--water-blue))",
+        "health-green": "hsl(var(--health-green))",
+        "data-teal": "hsl(var(--data-teal))",
+        "warning-orange": "hsl(var(--warning-orange))",
+        "clean-blue": "hsl(var(--clean-blue))",
+        "deep-blue": "hsl(var(--deep-blue))",
       },
       borderRadius: {
         lg: "var(--radius)",
