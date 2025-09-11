@@ -13,10 +13,13 @@ import {
   Droplets,
   ArrowLeft,
   AlertCircle,
-  CheckCircle
+  CheckCircle,
+  BookOpen
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, LineChart, Line } from 'recharts';
+import { AwarenessTraining } from "@/components/AwarenessTraining";
+import { LanguageToggle } from "@/components/LanguageToggle";
 
 const PublicPortal = () => {
   const [searchLocation, setSearchLocation] = useState("");
@@ -118,11 +121,12 @@ const PublicPortal = () => {
             </div>
 
             <Tabs defaultValue="overview" className="space-y-6">
-              <TabsList className="grid w-full grid-cols-4 bg-card">
+              <TabsList className="grid w-full grid-cols-5 bg-card">
                 <TabsTrigger value="overview">Overview</TabsTrigger>
                 <TabsTrigger value="diseases">Disease Risks</TabsTrigger>
                 <TabsTrigger value="quality">Water Quality</TabsTrigger>
                 <TabsTrigger value="trends">Trends</TabsTrigger>
+                <TabsTrigger value="awareness">Awareness</TabsTrigger>
               </TabsList>
 
               {/* Overview */}
@@ -282,10 +286,18 @@ const PublicPortal = () => {
                   </Card>
                 </div>
               </TabsContent>
+
+              {/* Awareness & Training */}
+              <TabsContent value="awareness" className="space-y-6">
+                <AwarenessTraining />
+              </TabsContent>
             </Tabs>
           </div>
         )}
       </div>
+
+      {/* Language Toggle */}
+      <LanguageToggle />
     </div>
   );
 };

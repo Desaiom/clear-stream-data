@@ -15,9 +15,17 @@ import {
   Droplets,
   ArrowLeft,
   Thermometer,
-  Gauge
+  Gauge,
+  MessageCircle,
+  Users,
+  BookOpen
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { RealTimeAlerts } from "@/components/RealTimeAlerts";
+import { AIChatInterface } from "@/components/AIChatInterface";
+import { ResourceRecommendations } from "@/components/ResourceRecommendations";
+import { AwarenessTraining } from "@/components/AwarenessTraining";
+import { LanguageToggle } from "@/components/LanguageToggle";
 
 const AdminDashboard = () => {
   const { toast } = useToast();
@@ -84,7 +92,7 @@ const AdminDashboard = () => {
 
       <div className="container mx-auto px-4 py-8">
         <Tabs defaultValue="iot" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-3 bg-card">
+          <TabsList className="grid w-full grid-cols-6 bg-card">
             <TabsTrigger value="iot" className="flex items-center space-x-2">
               <Activity className="h-4 w-4" />
               <span>IoT Data</span>
@@ -96,6 +104,18 @@ const AdminDashboard = () => {
             <TabsTrigger value="validate" className="flex items-center space-x-2">
               <CheckCircle className="h-4 w-4" />
               <span>Validation</span>
+            </TabsTrigger>
+            <TabsTrigger value="ai-chat" className="flex items-center space-x-2">
+              <MessageCircle className="h-4 w-4" />
+              <span>AI Chat</span>
+            </TabsTrigger>
+            <TabsTrigger value="resources" className="flex items-center space-x-2">
+              <Users className="h-4 w-4" />
+              <span>Resources</span>
+            </TabsTrigger>
+            <TabsTrigger value="training" className="flex items-center space-x-2">
+              <BookOpen className="h-4 w-4" />
+              <span>Training</span>
             </TabsTrigger>
           </TabsList>
 
@@ -267,8 +287,27 @@ const AdminDashboard = () => {
               </CardContent>
             </Card>
           </TabsContent>
+
+          {/* AI Chat Interface */}
+          <TabsContent value="ai-chat" className="space-y-6">
+            <AIChatInterface />
+          </TabsContent>
+
+          {/* Resource Recommendations */}
+          <TabsContent value="resources" className="space-y-6">
+            <ResourceRecommendations />
+          </TabsContent>
+
+          {/* Training & Awareness */}
+          <TabsContent value="training" className="space-y-6">
+            <AwarenessTraining />
+          </TabsContent>
         </Tabs>
       </div>
+
+      {/* Innovative Features Components */}
+      <RealTimeAlerts />
+      <LanguageToggle />
     </div>
   );
 };

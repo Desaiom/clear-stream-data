@@ -1,22 +1,62 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Droplets, Shield, Users, BarChart3, Search, Activity } from "lucide-react";
+import { Droplets, Shield, Users, BarChart3, Search, Activity, LogIn } from "lucide-react";
 import { Link } from "react-router-dom";
+import { LoginModal } from "@/components/LoginModal";
+import { RealTimeAlerts } from "@/components/RealTimeAlerts";
+import { LanguageToggle } from "@/components/LanguageToggle";
 
 const Index = () => {
+  const [showLogin, setShowLogin] = useState(false);
+  const [userRole, setUserRole] = useState<string | null>(null);
+
+  const handleLogin = (role: string) => {
+    setUserRole(role);
+  };
+
+  const handleLogout = () => {
+    setUserRole(null);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-clean-blue to-background">
+      {/* Header with Login */}
+      <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
+        <div className="flex items-center space-x-2">
+          <Droplets className="h-8 w-8 text-water-blue" />
+          <span className="text-xl font-bold" data-translate="title">AquaHealth</span>
+        </div>
+        <div className="flex items-center space-x-4">
+          {userRole ? (
+            <div className="flex items-center space-x-3">
+              <Badge className="bg-gradient-to-r from-primary to-deep-blue text-white">
+                {userRole === 'admin' ? 'Administrator' : 'User'}
+              </Badge>
+              <Button variant="outline" onClick={handleLogout}>
+                Logout
+              </Button>
+            </div>
+          ) : (
+            <Button onClick={() => setShowLogin(true)} className="bg-gradient-to-r from-primary to-deep-blue">
+              <LogIn className="h-4 w-4 mr-2" />
+              Login
+            </Button>
+          )}
+        </div>
+      </nav>
+
       {/* Hero Section */}
       <header className="container mx-auto px-4 py-16">
         <div className="text-center space-y-6">
           <div className="flex justify-center items-center space-x-3 mb-4">
             <Droplets className="h-12 w-12 text-water-blue" />
-            <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-water-blue to-data-teal bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-water-blue to-data-teal bg-clip-text text-transparent" data-translate="title">
               AquaHealth
             </h1>
           </div>
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed" data-translate="subtitle">
             Unified Water Health Monitoring Platform for Disease Prevention & Public Health
           </p>
           <Badge variant="secondary" className="text-lg px-4 py-2">
@@ -122,6 +162,16 @@ const Index = () => {
       <footer className="container mx-auto px-4 py-8 text-center text-muted-foreground">
         <p>&copy; 2024 AquaHealth Platform. Protecting public health through water monitoring.</p>
       </footer>
+
+      {/* Innovative Features Components */}
+      <RealTimeAlerts />
+      <LanguageToggle />
+      
+      <LoginModal 
+        open={showLogin} 
+        onOpenChange={setShowLogin} 
+        onLogin={handleLogin}
+      />
     </div>
   );
 };
