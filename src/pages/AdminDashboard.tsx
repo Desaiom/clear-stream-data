@@ -26,6 +26,9 @@ import { AIChatInterface } from "@/components/AIChatInterface";
 import { ResourceRecommendations } from "@/components/ResourceRecommendations";
 import { AwarenessTraining } from "@/components/AwarenessTraining";
 import { LanguageToggle } from "@/components/LanguageToggle";
+import { AnalyticsDashboard } from "@/components/AnalyticsDashboard";
+import { NotificationCenter } from "@/components/NotificationCenter";
+import { ExportData } from "@/components/ExportData";
 
 const AdminDashboard = () => {
   const { toast } = useToast();
@@ -91,15 +94,23 @@ const AdminDashboard = () => {
       </header>
 
       <div className="container mx-auto px-4 py-8">
-        <Tabs defaultValue="iot" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-6 bg-card">
+        <Tabs defaultValue="analytics" className="space-y-6">
+          <TabsList className="grid w-full grid-cols-8 bg-card">
+            <TabsTrigger value="analytics" className="flex items-center space-x-2">
+              <BarChart3 className="h-4 w-4" />
+              <span>Analytics</span>
+            </TabsTrigger>
+            <TabsTrigger value="notifications" className="flex items-center space-x-2">
+              <AlertTriangle className="h-4 w-4" />
+              <span>Alerts</span>
+            </TabsTrigger>
+            <TabsTrigger value="export" className="flex items-center space-x-2">
+              <FileText className="h-4 w-4" />
+              <span>Export</span>
+            </TabsTrigger>
             <TabsTrigger value="iot" className="flex items-center space-x-2">
               <Activity className="h-4 w-4" />
               <span>IoT Data</span>
-            </TabsTrigger>
-            <TabsTrigger value="pdf" className="flex items-center space-x-2">
-              <FileText className="h-4 w-4" />
-              <span>PDF Reports</span>
             </TabsTrigger>
             <TabsTrigger value="validate" className="flex items-center space-x-2">
               <CheckCircle className="h-4 w-4" />
@@ -118,6 +129,21 @@ const AdminDashboard = () => {
               <span>Training</span>
             </TabsTrigger>
           </TabsList>
+
+          {/* Analytics Dashboard */}
+          <TabsContent value="analytics" className="space-y-6">
+            <AnalyticsDashboard />
+          </TabsContent>
+
+          {/* Notification Center */}
+          <TabsContent value="notifications" className="space-y-6">
+            <NotificationCenter />
+          </TabsContent>
+
+          {/* Export Data */}
+          <TabsContent value="export" className="space-y-6">
+            <ExportData />
+          </TabsContent>
 
           {/* IoT Sensor Data */}
           <TabsContent value="iot" className="space-y-6">

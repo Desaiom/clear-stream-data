@@ -20,6 +20,10 @@ import { Link } from "react-router-dom";
 import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, LineChart, Line } from 'recharts';
 import { AwarenessTraining } from "@/components/AwarenessTraining";
 import { LanguageToggle } from "@/components/LanguageToggle";
+import { InteractiveMap } from "@/components/InteractiveMap";
+import { PersonalizedAlerts } from "@/components/PersonalizedAlerts";
+import { ComparisonTool } from "@/components/ComparisonTool";
+import { CommunityEngagement } from "@/components/CommunityEngagement";
 
 const PublicPortal = () => {
   const [searchLocation, setSearchLocation] = useState("");
@@ -121,13 +125,36 @@ const PublicPortal = () => {
             </div>
 
             <Tabs defaultValue="overview" className="space-y-6">
-              <TabsList className="grid w-full grid-cols-5 bg-card">
+              <TabsList className="grid w-full grid-cols-8 bg-card text-xs">
                 <TabsTrigger value="overview">Overview</TabsTrigger>
-                <TabsTrigger value="diseases">Disease Risks</TabsTrigger>
-                <TabsTrigger value="quality">Water Quality</TabsTrigger>
-                <TabsTrigger value="trends">Trends</TabsTrigger>
+                <TabsTrigger value="map">Map View</TabsTrigger>
+                <TabsTrigger value="alerts">Alerts</TabsTrigger>
+                <TabsTrigger value="compare">Compare</TabsTrigger>
+                <TabsTrigger value="diseases">Diseases</TabsTrigger>
+                <TabsTrigger value="quality">Quality</TabsTrigger>
+                <TabsTrigger value="community">Community</TabsTrigger>
                 <TabsTrigger value="awareness">Awareness</TabsTrigger>
               </TabsList>
+
+              {/* Interactive Map */}
+              <TabsContent value="map" className="space-y-6">
+                <InteractiveMap />
+              </TabsContent>
+
+              {/* Personalized Alerts */}
+              <TabsContent value="alerts" className="space-y-6">
+                <PersonalizedAlerts />
+              </TabsContent>
+
+              {/* Comparison Tool */}
+              <TabsContent value="compare" className="space-y-6">
+                <ComparisonTool />
+              </TabsContent>
+
+              {/* Community Engagement */}
+              <TabsContent value="community" className="space-y-6">
+                <CommunityEngagement />
+              </TabsContent>
 
               {/* Overview */}
               <TabsContent value="overview" className="space-y-6">
