@@ -30,9 +30,13 @@ import { LanguageToggle } from "@/components/LanguageToggle";
 import { AnalyticsDashboard } from "@/components/AnalyticsDashboard";
 import { NotificationCenter } from "@/components/NotificationCenter";
 import { ExportData } from "@/components/ExportData";
+import { FilterPanel } from "@/components/FilterPanel";
+import { SavedViews } from "@/components/SavedViews";
+import { useFilters } from "@/hooks/useFilters";
 
 const AdminDashboard = () => {
   const { toast } = useToast();
+  const { filters, updateFilters, clearFilters } = useFilters();
   const [sensorData, setSensorData] = useState({
     ph: "7.2",
     turbidity: "1.5",
@@ -133,7 +137,16 @@ const AdminDashboard = () => {
 
           {/* Analytics Dashboard */}
           <TabsContent value="analytics" className="space-y-6">
-            <AnalyticsDashboard />
+            <FilterPanel 
+              filters={filters}
+              onFiltersChange={updateFilters}
+              onClearFilters={clearFilters}
+            />
+            <SavedViews 
+              currentFilters={filters}
+              onLoadView={updateFilters}
+            />
+            <AnalyticsDashboard filters={filters} />
           </TabsContent>
 
           {/* Notification Center */}

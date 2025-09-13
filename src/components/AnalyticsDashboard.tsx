@@ -12,18 +12,83 @@ import {
   Gauge
 } from "lucide-react";
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, AreaChart, Area } from 'recharts';
+import { FilterState } from "./FilterPanel";
 
-export const AnalyticsDashboard = () => {
-  const keyMetrics = {
-    safeZones: 78,
-    warningZones: 15,
-    criticalZones: 7,
-    alertsToday: 12,
-    alertsWeek: 89,
-    avgPH: 7.1,
-    avgTurbidity: 1.8,
-    avgTemperature: 23.2
+interface AnalyticsDashboardProps {
+  filters?: FilterState;
+}
+
+export const AnalyticsDashboard = ({ filters }: AnalyticsDashboardProps) => {
+  // Mock data that can be filtered
+  const mockData = [
+    { id: 1, date: "2024-01-15", location: "Maharashtra Mumbai Andheri", ph: 7.2, turbidity: 1.5, temperature: 23.2, status: "safe" },
+    { id: 2, date: "2024-01-16", location: "Karnataka Bangalore Whitefield", ph: 6.8, turbidity: 2.1, temperature: 24.1, status: "warning" },
+    { id: 3, date: "2024-01-17", location: "Tamil Nadu Chennai T Nagar", ph: 7.5, turbidity: 0.8, temperature: 22.5, status: "safe" },
+    { id: 4, date: "2024-01-18", location: "Gujarat Ahmedabad", ph: 6.2, turbidity: 3.2, temperature: 26.8, status: "critical" },
+    { id: 5, date: "2024-01-19", location: "Maharashtra Pune Hadapsar", ph: 7.1, turbidity: 1.8, temperature: 23.8, status: "safe" },
+  ];
+
+  // Apply filters to data
+  const filteredData = filters ? applyFiltersToData(mockData, filters) : mockData;
+  
+  // Calculate metrics based on filtered data
+  const calculateMetrics = (data: typeof mockData) => {
+    const total = data.length;
+    if (total === 0) {
+      return {
+        safeZones: 0,
+        warningZones: 0,
+        criticalZones: 0,
+        alertsToday: 0,
+        alertsWeek: 0,
+        avgPH: 0,
+        avgTurbidity: 0,
+        avgTemperature: 0
+      };
+    }
+
+    const safe = data.filter(d => d.status === "safe").length;
+    const warning = data.filter(d => d.status === "warning").length;
+    const critical = data.filter(d => d.status === "critical").length;
+    
+    const avgPH = data.reduce((sum, d) => sum + d.ph, 0) / total;
+    const avgTurbidity = data.reduce((sum, d) => sum + d.turbidity, 0) / total;
+    const avgTemperature = data.reduce((sum, d) => sum + d.temperature, 0) / total;
+
+    return {
+      safeZones: Math.round((safe / total) * 100),
+      warningZones: Math.round((warning / total) * 100),
+      criticalZones: Math.round((critical / total) * 100),
+      alertsToday: warning + critical,
+      alertsWeek: (warning + critical) * 7,
+      avgPH: Number(avgPH.toFixed(1)),
+      avgTurbidity: Number(avgTurbidity.toFixed(1)),
+      avgTemperature: Number(avgTemperature.toFixed(1))
+    };
   };
+
+  const keyMetrics = calculateMetrics(filteredData);
+
+  // Helper function to apply filters
+  function applyFiltersToData(data: typeof mockData, filters: FilterState) {
+    return data.filter((item) => {
+      // Date filtering
+      if (filters.dateRange.from && new Date(item.date) < filters.dateRange.from) return false;
+      if (filters.dateRange.to && new Date(item.date) > filters.dateRange.to) return false;
+
+      // Location filtering
+      if (filters.location.state && !item.location.toLowerCase().includes(filters.location.state.toLowerCase())) return false;
+      if (filters.location.district && !item.location.toLowerCase().includes(filters.location.district.toLowerCase())) return false;
+      if (filters.location.village && !item.location.toLowerCase().includes(filters.location.village.toLowerCase())) return false;
+
+      // Water quality parameter filtering
+      if (item.ph < filters.waterQuality.phRange[0] || item.ph > filters.waterQuality.phRange[1]) return false;
+      if (item.turbidity < filters.waterQuality.turbidityRange[0] || item.turbidity > filters.waterQuality.turbidityRange[1]) return false;
+      if (item.temperature < filters.waterQuality.temperatureRange[0] || item.temperature > filters.waterQuality.temperatureRange[1]) return false;
+
+      return true;
+    });
+  }
 
   const weeklyTrends = [
     { day: 'Mon', safe: 82, warning: 12, critical: 6, alerts: 8 },
@@ -46,6 +111,24 @@ export const AnalyticsDashboard = () => {
 
   return (
     <div className="space-y-6">
+      {/* Filter Status Banner */}
+      {filters && hasActiveFilters(filters) && (
+        <Card className="border-primary/20 bg-primary/5">
+          <CardContent className="pt-6">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <Activity className="h-5 w-5 text-primary" />
+                <span className="font-medium">Filtered Results</span>
+                <Badge variant="secondary">{filteredData.length} records</Badge>
+              </div>
+              <Badge variant="outline">
+                Showing {filteredData.length} of {mockData.length} total records
+              </Badge>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
       {/* Key Metrics Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <Card>
@@ -218,4 +301,21 @@ export const AnalyticsDashboard = () => {
       </Card>
     </div>
   );
+
+  // Helper function to check if filters are active
+  function hasActiveFilters(filters: FilterState) {
+    return (
+      filters.dateRange.from !== undefined ||
+      filters.dateRange.to !== undefined ||
+      filters.location.state !== "" ||
+      filters.location.district !== "" ||
+      filters.location.village !== "" ||
+      filters.waterQuality.phRange[0] !== 0 ||
+      filters.waterQuality.phRange[1] !== 14 ||
+      filters.waterQuality.turbidityRange[0] !== 0 ||
+      filters.waterQuality.turbidityRange[1] !== 10 ||
+      filters.waterQuality.temperatureRange[0] !== 0 ||
+      filters.waterQuality.temperatureRange[1] !== 50
+    );
+  }
 };
