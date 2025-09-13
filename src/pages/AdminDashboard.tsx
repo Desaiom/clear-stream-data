@@ -19,7 +19,7 @@ import {
   MessageCircle,
   Users,
   BookOpen,
-  BarChart3
+  BarChart
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { RealTimeAlerts } from "@/components/RealTimeAlerts";
@@ -98,7 +98,7 @@ const AdminDashboard = () => {
         <Tabs defaultValue="analytics" className="space-y-6">
           <TabsList className="grid w-full grid-cols-8 bg-card">
             <TabsTrigger value="analytics" className="flex items-center space-x-2">
-              <BarChart3 className="h-4 w-4" />
+              <BarChart className="h-4 w-4" />
               <span>Analytics</span>
             </TabsTrigger>
             <TabsTrigger value="notifications" className="flex items-center space-x-2">
