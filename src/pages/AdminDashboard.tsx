@@ -6,7 +6,6 @@ import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
-import { BarChart } from '@mui/x-charts';
 import { 
   Activity, 
   FileText, 
@@ -19,7 +18,8 @@ import {
   Gauge,
   MessageCircle,
   Users,
-  BookOpen
+  BookOpen,
+  BarChart3
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { RealTimeAlerts } from "@/components/RealTimeAlerts";
