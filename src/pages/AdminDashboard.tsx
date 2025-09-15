@@ -33,16 +33,55 @@ import { ExportData } from "@/components/ExportData";
 import { FilterPanel } from "@/components/FilterPanel";
 import { SavedViews } from "@/components/SavedViews";
 import { useFilters } from "@/hooks/useFilters";
+import { LoginModal } from "@/components/LoginModal";
 
 const AdminDashboard = () => {
   const { toast } = useToast();
   const { filters, updateFilters, clearFilters } = useFilters();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(true);
   const [sensorData, setSensorData] = useState({
     ph: "7.2",
     turbidity: "1.5",
     temperature: "22.5",
     location: "District A, Zone 1"
   });
+
+  const handleLogin = (role: string) => {
+    if (role === "admin") {
+      setIsAuthenticated(true);
+      setShowLoginModal(false);
+    } else {
+      toast({
+        title: "Access Denied",
+        description: "Only administrators can access this panel.",
+        variant: "destructive"
+      });
+    }
+  };
+
+  // If not authenticated, show login modal
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-clean-blue to-background flex items-center justify-center">
+        <LoginModal 
+          open={showLoginModal} 
+          onOpenChange={setShowLoginModal}
+          onLogin={handleLogin}
+        />
+        {!showLoginModal && (
+          <div className="text-center">
+            <Shield className="h-16 w-16 text-primary mx-auto mb-4" />
+            <h1 className="text-2xl font-bold text-primary mb-2">Admin Access Required</h1>
+            <p className="text-muted-foreground mb-4">Please login to access the admin dashboard</p>
+            <Button onClick={() => setShowLoginModal(true)}>
+              Login to Admin Panel
+            </Button>
+          </div>
+        )}
+      </div>
+    );
+  }
 
   const handleDataValidation = () => {
     toast({
