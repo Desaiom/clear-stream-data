@@ -1,49 +1,19 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Droplets, Shield, Users, BarChart3, Search, Activity, LogIn } from "lucide-react";
+import { Droplets, Shield, Users, BarChart3, Search, Activity } from "lucide-react";
 import { Link } from "react-router-dom";
-import { LoginModal } from "@/components/LoginModal";
 import { RealTimeAlerts } from "@/components/RealTimeAlerts";
 import { LanguageToggle } from "@/components/LanguageToggle";
 
 const Index = () => {
-  const [showLogin, setShowLogin] = useState(false);
-  const [userRole, setUserRole] = useState<string | null>(null);
-
-  const handleLogin = (role: string) => {
-    setUserRole(role);
-  };
-
-  const handleLogout = () => {
-    setUserRole(null);
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-clean-blue to-background">
-      {/* Header with Login */}
+      {/* Header */}
       <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
         <div className="flex items-center space-x-2">
           <Droplets className="h-8 w-8 text-water-blue" />
           <span className="text-xl font-bold" data-translate="title">AquaHealth</span>
-        </div>
-        <div className="flex items-center space-x-4">
-          {userRole ? (
-            <div className="flex items-center space-x-3">
-              <Badge className="bg-gradient-to-r from-primary to-deep-blue text-white">
-                {userRole === 'admin' ? 'Administrator' : 'User'}
-              </Badge>
-              <Button variant="outline" onClick={handleLogout}>
-                Logout
-              </Button>
-            </div>
-          ) : (
-            <Button onClick={() => setShowLogin(true)} className="bg-gradient-to-r from-primary to-deep-blue">
-              <LogIn className="h-4 w-4 mr-2" />
-              Login
-            </Button>
-          )}
         </div>
       </nav>
 
@@ -166,12 +136,6 @@ const Index = () => {
       {/* Innovative Features Components */}
       <RealTimeAlerts />
       <LanguageToggle />
-      
-      <LoginModal 
-        open={showLogin} 
-        onOpenChange={setShowLogin} 
-        onLogin={handleLogin}
-      />
     </div>
   );
 };
