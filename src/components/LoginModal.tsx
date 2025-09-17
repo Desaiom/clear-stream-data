@@ -35,7 +35,7 @@ export const LoginModal = ({ open, onOpenChange, onLogin }: LoginModalProps) => 
         onLogin("viewer");
         toast({
           title: "Login Successful",
-          description: "Welcome to AquaHealth Portal!",
+          description: "Welcome to GramSwasthya Portal!",
         });
       }
       onOpenChange(false);
@@ -67,7 +67,7 @@ export const LoginModal = ({ open, onOpenChange, onLogin }: LoginModalProps) => 
                 <Input
                   id="email"
                   type="email"
-                  placeholder="admin@aquahealth.gov (try admin for admin role)"
+                  placeholder="admin@gramswasthya.gov (try admin for admin role)"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required

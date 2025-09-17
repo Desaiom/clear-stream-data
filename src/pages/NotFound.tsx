@@ -21,7 +21,7 @@ const NotFound = () => {
         </div>
         <Button asChild className="bg-gradient-to-r from-primary to-deep-blue">
           <a href="/">
-            Return to AquaHealth Home
+            Return to GramSwasthya Home
           </a>
         </Button>
       </div>

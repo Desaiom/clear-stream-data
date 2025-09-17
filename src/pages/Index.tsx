@@ -13,7 +13,7 @@ const Index = () => {
       <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
         <div className="flex items-center space-x-2">
           <Droplets className="h-8 w-8 text-water-blue" />
-          <span className="text-xl font-bold" data-translate="title">AquaHealth</span>
+          <span className="text-xl font-bold" data-translate="title">GramSwasthya</span>
         </div>
       </nav>
 
@@ -23,11 +23,11 @@ const Index = () => {
           <div className="flex justify-center items-center space-x-3 mb-4">
             <Droplets className="h-12 w-12 text-water-blue" />
             <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-water-blue to-data-teal bg-clip-text text-transparent" data-translate="title">
-              AquaHealth
+              GramSwasthya
             </h1>
           </div>
           <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed" data-translate="subtitle">
-            Unified Water Health Monitoring Platform for Disease Prevention & Public Health
+            Unified Rural Health Monitoring Platform for Disease Prevention & Public Health
           </p>
           <Badge variant="secondary" className="text-lg px-4 py-2">
             Nationwide Coverage • Real-time Data • AI-Powered Predictions
@@ -130,7 +130,7 @@ const Index = () => {
 
       {/* Footer */}
       <footer className="container mx-auto px-4 py-8 text-center text-muted-foreground">
-        <p>&copy; 2024 AquaHealth Platform. Protecting public health through water monitoring.</p>
+        <p>&copy; 2024 GramSwasthya Platform. Protecting rural health through community monitoring.</p>
       </footer>
 
       {/* Innovative Features Components */}

@@ -1,73 +1,92 @@
-# Welcome to your Lovable project
+# GramSwasthya - Rural Health Monitoring Platform
 
-## Project info
+A comprehensive digital platform designed to monitor and track health conditions in rural communities, with a focus on water-related diseases and community health management.
 
-**URL**: https://lovable.dev/projects/80df4b19-c8ab-4638-b856-bccf68d092a7
+## 🚀 Features
 
-## How can I edit this code?
+- **Real-time Health Monitoring**: Track patient symptoms and health conditions
+- **Interactive Disease Mapping**: Visual representation of health data across regions  
+- **AI-Powered Analytics**: Intelligent insights for healthcare workers
+- **Community Engagement**: Tools for health awareness and training
+- **Multi-language Support**: Accessible interface for diverse communities
+- **Admin Dashboard**: Complete management system for healthcare administrators
+- **Public Portal**: Community access to health information and resources
 
-There are several ways of editing your application.
+## 🛠️ Tech Stack
 
-**Use Lovable**
+- **Frontend**: React 18, TypeScript, Tailwind CSS
+- **UI Components**: shadcn/ui, Radix UI
+- **Charts & Visualization**: Recharts
+- **State Management**: React Query (TanStack Query)
+- **Routing**: React Router v6
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS with custom design system
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/80df4b19-c8ab-4638-b856-bccf68d092a7) and start prompting.
+## 🏥 Use Cases
 
-Changes made via Lovable will be committed automatically to this repo.
+- Rural health monitoring and disease tracking
+- Community health worker tools
+- Health data visualization and reporting
+- Public health awareness campaigns
+- Emergency health response coordination
 
-**Use your preferred IDE**
+## 🚀 Getting Started
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Prerequisites
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- Node.js (v18 or higher)
+- npm or yarn package manager
 
-Follow these steps:
+### Installation
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd gramswasthya
+```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+2. Install dependencies:
+```bash
+npm install
+```
 
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+3. Start the development server:
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+4. Open [http://localhost:8080](http://localhost:8080) to view the application
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Building for Production
 
-**Use GitHub Codespaces**
+```bash
+npm run build
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 🌐 Deployment
 
-## What technologies are used for this project?
+This project can be deployed on any static hosting platform. For easy deployment, use the built-in Lovable deployment feature by clicking the Publish button.
 
-This project is built with:
+## 👥 Contributors
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- [@VJ12More](https://github.com/VJ12More) - Project Lead & Developer
 
-## How can I deploy this project?
+## 📄 License
 
-Simply open [Lovable](https://lovable.dev/projects/80df4b19-c8ab-4638-b856-bccf68d092a7) and click on Share -> Publish.
+This project is open source and available under the [MIT License](LICENSE).
 
-## Can I connect a custom domain to my Lovable project?
+## 🤝 Contributing
 
-Yes, you can!
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## 📞 Support
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+For support and questions, please open an issue in the GitHub repository.
+
+---
+
+*Built with ❤️ for rural healthcare communities*

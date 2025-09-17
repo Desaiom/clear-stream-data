@@ -31,8 +31,8 @@ const languages: Language[] = [
 // Mock translations for demo
 const translations = {
   en: {
-    title: "AquaHealth",
-    subtitle: "Unified Water Health Monitoring Platform for Disease Prevention & Public Health",
+    title: "GramSwasthya",
+    subtitle: "Unified Rural Health Monitoring Platform for Disease Prevention & Public Health",
     adminPanel: "Admin Panel",
     publicPortal: "Public Portal",
     searchPlaceholder: "Search by location...",
